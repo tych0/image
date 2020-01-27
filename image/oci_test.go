@@ -420,12 +420,3 @@ func TestConvertToManifestSchema2AllMediaTypes(t *testing.T) {
 	})
 	require.Error(t, err) // zstd compression is not supported for docker images
 }
-
-func TestConvertToV2S2WithInvalidMIMEType(t *testing.T) {
-	originalSrc := newOCI1ImageSource(t, "httpd-copy:latest")
-	manifest, err := ioutil.ReadFile(filepath.Join("fixtures", "oci1-invalid-media-type.json"))
-	require.NoError(t, err)
-
-	_, err = manifestOCI1FromManifest(originalSrc, manifest)
-	require.Error(t, err)
-}

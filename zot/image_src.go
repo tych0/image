@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/containers/image/types"
+	"github.com/containers/image/v5/types"
 	"github.com/opencontainers/go-digest"
 	ispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/pkg/errors"
@@ -56,6 +56,6 @@ func (o *zotImageSource) GetSignatures(ctx context.Context, instanceDigest *dige
 	return [][]byte{}, nil // TODO
 }
 
-func (o *zotImageSource) LayerInfosForCopy(ctx context.Context) ([]types.BlobInfo, error) {
+func (o *zotImageSource) LayerInfosForCopy(ctx context.Context, unused *digest.Digest) ([]types.BlobInfo, error) {
 	return nil, nil
 }

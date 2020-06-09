@@ -4,9 +4,10 @@ import (
 	"context"
 	"io"
 
-	"github.com/containers/image/pkg/blobinfocache/none"
-	"github.com/containers/image/types"
+	"github.com/containers/image/v5/pkg/blobinfocache/none"
+	"github.com/containers/image/v5/types"
 	ispec "github.com/opencontainers/image-spec/specs-go/v1"
+	"github.com/opencontainers/go-digest"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 )
@@ -103,14 +104,14 @@ func (o *zotImageDest) TryReusingBlob(ctx context.Context, info types.BlobInfo, 
 	return false, types.BlobInfo{}, nil
 }
 
-func (o *zotImageDest) PutManifest(ctx context.Context, m []byte) error {
+func (o *zotImageDest) PutManifest(ctx context.Context, m []byte, unused *digest.Digest) error {
 	return o.s.PutManifest(m)
 }
 
-func (o *zotImageDest) PutSignatures(ctx context.Context, signatures [][]byte) error {
+func (o *zotImageDest) PutSignatures(ctx context.Context, signatures [][]byte, unused *digest.Digest) error {
 	return nil // TODO
 }
 
-func (o *zotImageDest) Commit(ctx context.Context) error {
+func (o *zotImageDest) Commit(ctx context.Context, unused types.UnparsedImage) error {
 	return nil
 }
